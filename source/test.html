@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #ddd;
+        }
+        .box {
+            padding: 20px;
+            font-size: 16px;
+        }
+        input {
+            background: #fff;
+            border: none;
+            height: 35px;
+            padding: 5px;
+            box-sizing: border-box;
+            outline: none;
+        }
+        .phone input {
+            width: 100%;
+        }
+        .code {
+            margin-top: 10px;
+        }
+        .code input {
+            display: inline-block;
+            width: 60%;
+        }
+        .code button {
+            display: inline-block;
+            width: 40%;
+            height: 35px;
+            margin-left: -4px;
+            margin-top: 0;
+        }
+        button {
+            background: #1e89e0;
+            color: #fff;
+            border: none;
+            outline: none;
+            width: 100%;
+            margin-top: 10px;
+            height: 35px;
+        }
+        .disabled {
+            background: #c1c1c1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <div class="phone">
+        <input type="text" id="phone" placeholder="请输入手机号" />
+    </div>
+    <div class="code">
+        <input type="text" id="code" placeholder="请输入验证码" />
+        <button id="deliver">发送验证码</button>
+    </div>
+    <button id="login">登录</button>
+</div>
+<script>
+    var btnDeliver = document.getElementById('deliver');
+    var btnLogin = document.getElementById("login");
+    var time = 60;
+    function timeHandle() {
+        time --;
+        btnDeliver.innerHTML = time + 's';
+        if (time <= 0) {
+            btnDeliver.className = '';
+            btnDeliver.innerHTML = '发送验证码';
+            time = 60;
+            return;
+        }
+        setTimeout(timeHandle, 1000);
+
+    }
+    btnDeliver.onclick = function() {
+        sendSms();
+    };
+    btnLogin.onclick = function () {
+        validCode();
+    };
+
+    var number = Math.round(900000*Math.random()+100000);
+    var content = "【测试】您的验证码为 "+number;
+
+    function sendSms() {
+        var phone = document.getElementById("phone").value;
+        if(phone == ""){
+            alert("请输入手机号");
+            return;
+        }
+        limit();
+        doPost(phone)
+    }
+
+    function doPost(phone) {
+        var xmlHttp;
+        if(window.ActiveXObject){
+            xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }else if(window.XMLHttpRequest) {
+            xmlHttp = new XMLHttpRequest();
+        }
+        xmlHttp.open("POST","https://api.submail.cn/message/send.json");
+        xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        xmlHttp.setRequestHeader("Accept","json");
+        xmlHttp.send("appid=12340&to"+phone+"&content="+content+"&signature=a55283ce1436bc2515b29b533a4b1f49");
+        xmlHttp.onreadystatechange=function(){
+            if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                alert(xmlHttp.responseText);
+            }else{
+                alert('fail');
+            }
+        }
+    }
+    function limit() {
+        if (this.className === 'disabled') return false;
+        this.className = 'disabled';
+        timeHandle();
+    }
+    function validCode() {
+        var phone = document.getElementById("code").value;
+        if(code == ""){
+            alert("请输入验证码");
+            return;
+        }
+        if(code == number){
+            alert(document.getElementById("phone").value)
+        }else{
+            alert("验证码错误");
+        }
+    }
+</script>
+</body>
+</html>
