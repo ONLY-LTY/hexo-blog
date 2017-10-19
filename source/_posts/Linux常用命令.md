@@ -28,5 +28,16 @@ jmap -dump:format=b,,file=fileNaem.bin <pid>  导出java dump文件
 scp usreName@Host:remoteDir localDir  从远程下载文件到本地
 scp localDir userName@Host:remoteDir  上传本地文件到远程
 
+----------VIM---------
+:set fileencoding 显示文件编码
+:set encoding=utf-8 设置文件编码
+:set number 显示行号
+:set nonumber 不显示行号
+
+
+---------HEXO---------
+hexo server
+hexo new article
+heox g -d
 
 ```
