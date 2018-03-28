@@ -1,6 +1,6 @@
 ---
 title: 关于我和本站
-layout: page
+layout: about 
 comments: false
 ---
 

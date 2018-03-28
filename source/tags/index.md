@@ -1,6 +1,6 @@
 ---
-title: All Tag
+title: 标签 
 date: 2016-11-10 15:45:17
-type: "tag"
+layout: "tags"
 comments: false
 ---
