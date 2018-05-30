@@ -10,11 +10,18 @@ Linux 常用命令
 ```linux
 hexdump -C binfile | less   查看二进制文件
 
+
+----------查看文件---------
 ls -lt  查看目录中文件按照时间顺序排序
 ls -ltr 查看目录中文件按照时间顺序倒序排序
 ls -Slh 查看目录中文件按照大小排序
 ls -Slhr  查看目录中文件按照大小倒序排序
+df -lh  查看当前磁盘的使用情况
+du -sh  查看当前文件夹的大小
 
+
+----------解压---------
+ls -lt  查看目录中文件按照时间顺序排序
 tar -czvf fileName.tar dirName  tar压缩包
 tar -zxvf fileName.tar  tar解压
 
@@ -39,5 +46,8 @@ scp localDir userName@Host:remoteDir  上传本地文件到远程
 hexo server
 hexo new article
 heox g -d
+
+---------MAC---------
+sudo spctl --master-disable MAC高版本允许任何来源安装
 
 ```

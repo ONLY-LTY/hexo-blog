@@ -8,6 +8,7 @@ HashMap 解析
 <!--more-->
 
 ## 概述
+
 HashMap 是一个集合对象，存储key-value类型的数据。内部主要使用哈希表的结构去实现。至于哈希表的的结构我们在此不做详细介绍，可自行脑补。下面的源码基于JDK1.8，由于进行了很多优化，代码会有点复杂。
 
 ## 成员变量
@@ -53,6 +54,7 @@ HashMap 是一个集合对象，存储key-value类型的数据。内部主要使
 ```
 
 ## put方法
+
 ```java
  public V put(K key, V value) {
         return putVal(hash(key), key, value, false, true);
@@ -167,6 +169,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 ```
 
 ## hash方法
+
 ```java
  static final int hash(Object key) {
         int h;
@@ -176,6 +179,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 我们put或者get的时候都会通过hash方法获取key对应的哈希值。当key为空的时候直接返回0，这样后面就无需再判读key是否为空，按照正常的hash处理就可以了。当key不为空是首先调用key自己的hashCode方法然后在进行移位运算。至于为什么这样做是处于多方面的考虑，比如速度，功效，质量等。
 
 ## resize方法
+
 这个方法是比较重要的方法，主要用来初始化和扩容HashMap
 
 ```java

@@ -6,7 +6,9 @@ tags:
 ---
 HashSet 解析
 <!--more-->
+
 ## 1 初始化
+
 HashSet是一个实现非常简单的类，为什么这么说呢？因为它的实现基本都依赖于HashMap，可以先来看一下初始化的内容
 ```java
 public class HashSet<E>
@@ -30,7 +32,9 @@ public class HashSet<E>
 
 ```
 从上面代码就可以知道，HashSet依赖于HashMap的存储，HashSet是一个不允许重复数据放入集合，他的实现依赖于HashMap得key，把对象放入到key里面，按照HashMap的特性，Key是不允许重复的，那么依照这种特性，完全可以使用key去存储。
+
 ## 2 操作
+
 按照上面说的思路来说，其实添加和删除，无非是对HashMap的key进行一个操作而已
 ```java
 public boolean add(E e) {
