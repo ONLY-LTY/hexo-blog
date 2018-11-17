@@ -3,7 +3,7 @@ title: IdeaVim
 date: 2018-09-26 17:15:28
 tags:
 ---
-IdaeVim 配置文件 .ideavimrc
+IdeaVim 插件配置文件 
 <!--more-->
 
 ##### IdaeVim 配置文件 .ideavimrc
