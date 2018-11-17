@@ -5,6 +5,7 @@ tags:
   - Spring
 photos:
   - /img/20161129-1.jpeg
+top: true
 ---
 Spring bean 配置文件初始化
 <!--more-->

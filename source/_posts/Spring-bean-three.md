@@ -5,6 +5,7 @@ tags:
  - Spring
 photos:
  - /img/20161201.jpg
+top: true
 ---
 Spring bean 实例化
 <!--more-->

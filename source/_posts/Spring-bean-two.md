@@ -5,6 +5,7 @@ tags:
   - Spring
 photos:
   - /img/20161129-2.png
+top: true
 ---
 Spring bean 扫描注解初始化
 <!--more-->
