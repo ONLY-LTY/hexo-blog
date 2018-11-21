@@ -10,3 +10,5 @@ comments: false
 <p align="right" style="margin-top:40px">——加布瑞埃拉·泽文 《岛上书店》</p>
 本站没有高深的技术文章，没有深刻的人生反思，没有语言优美的篇幅，只是随心所作。
 <p align="right" style="margin-top:40px">——致读者</p>
+我自风情万种、与世无争。
+<p align="right" style="margin-top:40px">——致自己</p>
