@@ -70,3 +70,8 @@ JVM CMS垃圾回收器探索
 2.  CMS在垃圾回收的过程当中，会不停的有新对象在老年代分配，在CMS回收之前必须留有一部分空间，所以CMS不会在老年代满了的时候开始回收，使用 `-XX:CMSInitiatingOccupancyFraction=65 -XX:+UseCMSInitiatingOccupancyOnly` 这个两个参数来配置老年代空间到达什么阈值之后开始回收。特别注意的是如果不配置第二个参数，CMS只会在第一次回收的按照设置的阈值，后面CMS会根据情况动态调整阈值参数。
 3.  由CMS回收的过程中我们可以知道，在初始标记和重新标记两个阶段会STW，所以为了使得这两个阶段尽可能快一点执行完成，可以使用 `-XX:+CMSParallelInitialMarkEnabled -XX:+CMSParallelRemarkEnabled` 这个参数来开启并行标记。
 4.  在CMS回收的过程中，耗时最长的是重新标记阶段，可以使用 `-XX:+CMSScavengeBeforeRemark` 这个参数在重新标记之前执行一次Young GC。这样Young区待标记的对象就会减少很多，重新标记阶段的工作量就会少很多。因为执行Young GC也有一定的耗时，所以这个参数需要自己做一个权衡。
+
+---
+<p align='center'><font color='blue'>人间有味是清欢</font></p>
+
+---

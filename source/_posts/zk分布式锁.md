@@ -1,5 +1,5 @@
 ---
-title: zk分布式锁
+title: Zookeeper分布式锁
 date: 2018-06-01 18:09:31
 tags:
   - 分布式
