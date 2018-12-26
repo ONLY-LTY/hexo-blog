@@ -210,4 +210,41 @@ if $TERM_PROGRAM =~ "iTerm"
 let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
 let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
+
+call pathogen#infect()
+
+"自动开启Nerdtree
+autocmd vimenter * NERDTree  
+
+"设定 NERDTree 视窗大小
+let g:NERDTreeWinSize = 35 
+
+"开启/关闭nerdtree快捷键
+map <C-f> :NERDTreeToggle<CR>
+
+"开启Nerdtree时自动显示Bookmarks
+let NERDTreeShowBookmarks=1   
+
+"打开vim时如果没有文件自动打开NERDTree
+autocmd vimenter * if !argc()|NERDTree|endif
+
+"当NERDTree为剩下的唯一窗口时自动关闭
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"设置树的显示图标
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+"过滤所有.pyc文件不显示
+let NERDTreeIgnore = ['\.pyc$']  
+
+"是否显示行号
+let g:NERDTreeShowLineNumbers=1   
+
+"不显示隐藏文件
+let g:NERDTreeHidden=0     
+
+"Making it prettier
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 ```
