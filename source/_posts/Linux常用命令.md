@@ -9,6 +9,7 @@ Linux 常用命令
 
 ```linux
 hexdump -C binfile | less   查看二进制文件
+sudo tcpdump -i eth0 -Xlnps0 port 10000 抓包
 
 
 ----------查看文件---------
