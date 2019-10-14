@@ -3,12 +3,9 @@ title: Spring bean（三）
 date: 2016-11-24 19:24:11
 tags:
  - Spring
-photos:
- - /img/20161201.jpg
 top: true
 ---
 Spring bean 实例化
-<!--more-->
 
 &emsp;&emsp;小洋前面的已经看到了Spring bean的解析了。可是聪明的小洋发现那时候的bean并没有实例化。抱着不到黄河不死心的想法，小洋又开始了艰难的旅程。
 

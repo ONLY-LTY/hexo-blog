@@ -5,7 +5,6 @@ tags:
   - Linux
 ---
 Linux 常用命令
-<!--more-->
 
 ```linux
 hexdump -C binfile | less   查看二进制文件

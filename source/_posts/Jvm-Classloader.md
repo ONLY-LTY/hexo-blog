@@ -4,11 +4,8 @@ date: 2016-11-16 11:54:41
 tags:
   - Jvm
   - Classloader
-photos:
-  - /img/20161116a.jpg
 ---
 Java 类加载机制
-<!--more-->
 
 ### 说在前面的话
 

@@ -6,7 +6,6 @@ tags:
     -  GC
 ---
 JVM CMS垃圾回收器探索
-<!--more-->
 
 #### CMS简介
 

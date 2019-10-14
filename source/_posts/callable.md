@@ -5,7 +5,7 @@ tags:
   - Thread
 ---
 Java Callable Future使用详解。
-<!--more-->
+
 ```Java
 public interface Future<V> {
     //取消任务

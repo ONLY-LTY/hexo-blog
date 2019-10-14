@@ -4,8 +4,8 @@ date: 2017-03-13 16:58:41
 tags:
   - Java
 ---
-LinkedList 解析
-<!--more-->
+LinkedList 源码解析
+
 ## 1 初始化
 LinkedList也实现了List接口，说明了也具备了插入和删除功能,基于链表，插入和删除比ArrayList快，但是随机访问能力差，这个基础数据结构已经说明了，不再重复。其次LinkedList具备了双端队列的功能，实现了Deque接口
 ```java

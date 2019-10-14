@@ -3,12 +3,9 @@ title: Spring bean（一）
 date: 2016-11-24 15:46:43
 tags:
   - Spring
-photos:
-  - /img/20161129-1.jpeg
 top: true
 ---
 Spring bean 配置文件初始化
-<!--more-->
 
 &emsp;&emsp;Spring框架基础之模块-IOC，主要提供了依赖注入的实现。甚为重要，小洋闲来无事，再此专研一番。记之、
 

@@ -4,9 +4,7 @@ date: 2017-03-13 16:55:46
 tags:
   - Java
 ---
-ArrayList 解析
-<!--more-->
-
+ArrayList 源码解析
 
 ## 1 初始化
 

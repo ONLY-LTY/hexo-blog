@@ -3,11 +3,8 @@ title: JOOQ Start
 date: 2016-11-07 17:16:03
 tags:
   - JOOQ
-photos:
-     - /img/20161107.jpg
 ---
-JOOQ 开始
-<!--more-->
+JOOQ 简单的使用
 
 毕业以后进入的公司数据库持久层用的JOOQ，流式的API敲起来很爽。这里记录一下。具体的用法可以直接查看官网文档 *http://www.jooq.org/*
 

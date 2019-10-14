@@ -3,11 +3,9 @@ title: MySql杂谈
 date: 2016-11-19 11:06:51
 tags:
   - MySQL
-photos:
-  - /img/20161129mysql.jpg
 ---
 MySQL 闲杂知识点
-<!--more-->
+
 #### 1. MySQL concat
 
 &emsp;&emsp;我们使用MySQL中的concat链接字符串函数的时候，如果链接的字段中有一个NULL值的话，我们最后出来的结果就是NULL，显然这不是我们想要的。我们可以使用coalesce函数来对NULL值初始化。

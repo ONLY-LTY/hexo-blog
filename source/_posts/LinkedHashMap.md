@@ -4,8 +4,7 @@ date: 2017-03-13 16:51:21
 tags:
   - Java
 ---
-LinkedHashMap 解析
-<!--more-->
+LinkedHashMap 源码解析
 
 ## 概述
 

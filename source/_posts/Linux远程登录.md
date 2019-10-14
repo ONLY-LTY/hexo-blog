@@ -5,7 +5,6 @@ tags:
   - Linux
 ---
 Linux 远程登录 免密码
-<!--more-->
 
 ##### 第一步 将本地的 id_rsa.pub 文件上传到远程服务器
 

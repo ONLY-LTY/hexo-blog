@@ -3,12 +3,10 @@ title: Spring bean（二）
 date: 2016-11-24 19:20:06
 tags:
   - Spring
-photos:
-  - /img/20161129-2.png
 top: true
 ---
 Spring bean 扫描注解初始化
-<!--more-->
+
 &emsp;&emsp;天和日丽，阳光明媚，小洋接着看Spring bean。上篇文章我们说了，Spring初始化bean的时候有两种方式，一个是在xml里面配置<bean>相关内容。一个是用注解扫描。
 
 ```Java

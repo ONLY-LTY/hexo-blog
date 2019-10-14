@@ -5,7 +5,6 @@ tags:
   - Arithmetic
 ---
 归并排序
-<!--more-->
 
 ## 核心思想
 

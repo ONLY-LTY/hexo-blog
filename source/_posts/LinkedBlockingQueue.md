@@ -4,8 +4,7 @@ date: 2017-03-13 16:44:17
 tags:
   - Java
 ---
-LinkedBlockingQueue 分析
-<!--more-->
+LinkedBlockingQueue 源码分析
 
 ## 概述
 LinkedBlockingQueue 是线程安全的阻塞队列。

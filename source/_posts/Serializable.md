@@ -3,11 +3,8 @@ title: Serializable
 date: 2016-11-14 11:31:49
 tags:
   - 序列化
-photos:
-  - /img/20161115.jpg
 ---
-Java序列化
-<!--more-->
+Java 序列化
 
 &emsp;&emsp;最近在Rpc的一些内容，主要的序列化和传输两个模块挺重要的，然后详细的去了解了一些序列化的知识，也当复习下。
 
