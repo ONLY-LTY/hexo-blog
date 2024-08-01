@@ -5,7 +5,7 @@
 # Site
 title: LTY's Blog
 subtitle: 庭洋的博客
-description: 世界那么大、我想带你去看看
+#description: 世界那么大、我想带你去看看
 author: 像个孩子壹洋
 language: zh-CN
 timezone:
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next 
+theme: cactus
 
 
 widgets: popular_posts
