@@ -167,6 +167,8 @@ open_graph:
 # Enable MathJax support for Latex
 mathjax:
   enabled: true
+  cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML
+
 
 # Fill in your Disqus Comments Shortname to enable Disqus comments.
 disqus:
