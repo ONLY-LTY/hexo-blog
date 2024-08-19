@@ -19,7 +19,7 @@ Redis-Store是基于客户端的分布式存储路由中间件。本地从zookee
 ##### 节点类型设计
 ![](/img/zknode.png)
 
->
+
 * Cluster:  集群名称（对应业务名称）、每一个业务是一个独立的Cluster结构。zk根节点是[/clusters]。
 * Node:     数据的逻辑分区、可以理解为分片。
 * Instance：实际的Redis实例、由一小组主从结构构成。
