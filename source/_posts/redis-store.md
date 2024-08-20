@@ -17,8 +17,7 @@ Redis 分布式路由中间件
 Redis-Store是基于客户端的分布式存储路由中间件。本地从zookeeper配置中拉取和监听Redis配置信息、根据策略自动路由。
 
 ##### 节点类型设计
-![](/img/zknode.png)
-
+![](/img/zknode.jpg)
 
 * Cluster:  集群名称（对应业务名称）、每一个业务是一个独立的Cluster结构。zk根节点是[/clusters]。
 * Node:     数据的逻辑分区、可以理解为分片。
@@ -26,10 +25,10 @@ Redis-Store是基于客户端的分布式存储路由中间件。本地从zookee
 
 ##### 节点数据设计
 
-![](/img/uml.png)
+![](/img/cluster.jpg)
 
 ##### 路由流程设计
-![](/img/flow.png)
+![](/img/flow.jpg)
 
 客户端请求的如何落到具体的实例上面。针对原有的Redis客户端、将所有的方法的第一个参数设置为hashKey、后续的处理的根据hash选择Node、根据读写策略获取Master实例还是Slave实例进行具体的读写。比如一个简单的场景，我们初始化了10个分片也就是10个Node节点，每个节点下面一主两从实例。配置Cluster的Hash策略为简单的取模运算。当我们以用户的Id为haskKey进行路由的话，根据用户Id的最后一位数字能确定我们的请求到具体哪个Node，在进行写入的操作的时候请求落到Master实例上面，在进行读操作的时候请求会落到Slave实例上面（当然这是简单的读写策略）。
 
@@ -39,7 +38,7 @@ Redis-Store是基于客户端的分布式存储路由中间件。本地从zookee
 
 ##### 集群节点变更设计
 
-![](/img/rehash.png)
+![](/img/rehash.jpg)
 
 * 集群信息变更两个阶段的提交ACK和FINISH
 * 减少集群变更对数据一致性的影响
