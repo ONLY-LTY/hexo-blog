@@ -7,12 +7,13 @@ tags:
 ---
 反射和动态代理
 
->反射在java中是一个高级特性。它的用处很广泛，通过反射API可以获取程序在运行时刻的内部结构。本文不对反射基本API做详细的讲解。主要讲解反射在动态代理中应用。
+反射在java中是一个高级特性。它的用处很广泛，通过反射API可以获取程序在运行时刻的内部结构。本文不对反射基本API做详细的讲解。主要讲解反射在动态代理中应用。
 
-#### 动态代理和静态代理
- > **代理** : 为某个对象提供一个代理，以控制对这个对象的访问。 代理类和委托类有共同的父类或父接口，这样在任何使用委托类对象的地方都可以用代理对象替代。代理类负责请求的预处理、过滤、将请求分派给委托类处理、以及委托类执行完请求后的后续处理。
+## 什么是代理
+ 为某个对象提供一个代理，以控制对这个对象的访问。 代理类和委托类有共同的父类或父接口，这样在任何使用委托类对象的地方都可以用代理对象替代。代理类负责请求的预处理、过滤、将请求分派给委托类处理、以及委托类执行完请求后的后续处理。
 
-   1.**静态代理** :由程序员创建或工具生成代理类的源码，再编译代理类。所谓静态也就是在程序运行前就已经存在代理类的字节码文件，代理类和委托类的关系在运行前就确定了。
+## 静态代理
+   由程序员创建或工具生成代理类的源码，再编译代理类。所谓静态也就是在程序运行前就已经存在代理类的字节码文件，代理类和委托类的关系在运行前就确定了。
 ```java
 /**  
  * 代理接口。处理给定名字的任务。
@@ -72,7 +73,8 @@ public class ProxySubject implements Subject {
 ```
 上面代码就是一个简单的静态代理模式，我们获取到代理类ProxySubject可以操作相关接口。然后由具体的实现类执行。进而在真正执行方法前后做一些处理。很明显在代码运行前，相关类就已经确定。而我们针对每个接口类都需要实现代理类，增加新的接口方法，相关代理类也需要修改。代码不易维护。
 
-  2.**动态代理** : 顾名思义动态代理类的源码是在程序运行期间由JVM根据反射等机制动态的生成，所以不存在代理类的字节码文件。代理类和委托类的关系是在程序运行时确定。
+## 动态代理
+  顾名思义动态代理类的源码是在程序运行期间由JVM根据反射等机制动态的生成，所以不存在代理类的字节码文件。代理类和委托类的关系是在程序运行时确定。
 ```java
 /**  
  * 代理接口。处理给定名字的任务。 (和静态代理一样没有什么变化)
@@ -142,7 +144,7 @@ public class DynProxyFactory {
 ```
 由代码可以看出来，动态代理用到了InvocationHandler类和Proxy类。其基本模式就是将自己的方法功能实现交给InvocationHandler角色，外界Proxy角色中的每个方法的调用，Proxy角色都会交给InvocationHandler来处理，而InvocationHandler则调用具体的对象角色的方法。这样我们的代理类动态生成的，不需要像静态代理那样针对每个接口实现自己的代理类。那么Proxy是如何生成的代理类呢？我接下来看源码分析（很多，很枯燥）。
 
-#### JDK动态代理实现
+### JDK动态代理实现
 ```java
 @CallerSensitive
     public static Object newProxyInstance(ClassLoader loader,
@@ -543,8 +545,8 @@ private byte[] generateClassFile() {
     }
 
 ```
-#### 如何查看生成的代理类
->我们在上面的代码中可以知道当ProxyGenerator类中saveGeneratedFiles属性值为true时候会把生成的class保存在项目根目录com/sun/proxy目录下。但是一般saveGeneratedFiles的值是false。我们可以在方法调用前修改这个值为true。在项目根目录下新建com/sun/proxy这个目录。运行就可以看见生成的class文件了。拿如何设置这个值呢 ？？请看下面
+### 如何查看生成的代理类
+我们在上面的代码中可以知道当ProxyGenerator类中saveGeneratedFiles属性值为true时候会把生成的class保存在项目根目录com/sun/proxy目录下。但是一般saveGeneratedFiles的值是false。我们可以在方法调用前修改这个值为true。在项目根目录下新建com/sun/proxy这个目录。运行就可以看见生成的class文件了。拿如何设置这个值呢 ？？请看下面
 
 ```java
     //ProxyGenerator类中的saveGeneratedFiles属性值，是通过GetBooleanAction这个类获取的
@@ -581,7 +583,7 @@ public class GetBooleanAction implements PrivilegedAction<Boolean> {
         return result;
     }
 ```
-到这里我们知道了saveGeneratedFiles这个属性值是通过System.getProptery("sun.misc.ProxyGenerator.saveGeneratedFiles")这样初始化的。我们可以在调用Proxy的方法前设置一下就好了。在我们使用代理类的时候可以这样：
+到这里我们知道了*saveGeneratedFiles*这个属性值是通过*System.getProptery()*初始化的。我们可以在调用Proxy的方法前设置一下就好了。在我们使用代理类的时候可以这样:
 ```java
 /**
  * 使用方法
@@ -597,7 +599,7 @@ public class DynProxyFactory {
    proxy.dealTask("Proxy Task");
 }
 ```
-生成的class文件如下
+生成的class文件如下:
 ```java
 //
 // Source code recreated from a .class file by IntelliJ IDEA
@@ -675,12 +677,11 @@ public final class $Proxy0 extends Proxy implements Subject {
         }
     }
 }
-
 ```
->从中我们可以看出动态生成的代理类是以$Proxy为类名前缀，继承自Proxy，并且实现了Proxy.newProxyInstance(…)第二个参数传入的所有接口的类。如果代理类实现的接口中存在非 public 接口，则其包名为该接口的包名，否则为com.sun.proxy。其中的dealTeask()函数都是直接交给h去处理，h在父类Proxy中定义为protected InvocationHandler h;即为Proxy.newProxyInstance(…)第三个参数。所以InvocationHandler的子类 C 连接代理类 A 和委托类 B，它是代理类 A 的委托类，委托类 B 的代理类。
+从中我们可以看出动态生成的代理类是以$Proxy为类名前缀，继承自Proxy，并且实现了Proxy.newProxyInstance(…)第二个参数传入的所有接口的类。如果代理类实现的接口中存在非 public 接口，则其包名为该接口的包名，否则为com.sun.proxy。其中的dealTeask()函数都是直接交给h去处理，h在父类Proxy中定义为protected InvocationHandler h;即为Proxy.newProxyInstance(…)第三个参数。所以InvocationHandler的子类 C 连接代理类 A 和委托类 B，它是代理类 A 的委托类，委托类 B 的代理类。
 
-#### 小结一下
->本想仔细分析一下 generateClassFile 的实现，但直接生成 class 文件这种方式确实较为复杂，我就简单说一下其原理吧。有一种比较土的生成 class 文件的方法就是直接使用源码的字符串，用 JavaCompiler 动态编译生成。这样就可以通过所需实现的接口运用反射获得其方法信息，方法实现则直接调用 InvocationHandler 实现类的 invoke 方法，拼出整个代理类的源码，编译生成。而直接组装 class 文件的这种方式更为直接，根据 JVM 规范所定义的 class 文件的格式，省去了组装源码的步骤，使用输出流直接按格式生成 class 文件，相当于自己实现了 JVM 的功能。这样生成 class 后通过 classloader 加载类，反射调用构造方法进行实例化，就可以得到代理类对象了。上面的代码（还有一部分没贴）就是组装 class 文件的过程，奈何我对其也不是很懂
+## 小结一下
+本想仔细分析一下 generateClassFile 的实现，但直接生成 class 文件这种方式确实较为复杂，我就简单说一下其原理吧。有一种比较土的生成 class 文件的方法就是直接使用源码的字符串，用 JavaCompiler 动态编译生成。这样就可以通过所需实现的接口运用反射获得其方法信息，方法实现则直接调用 InvocationHandler 实现类的 invoke 方法，拼出整个代理类的源码，编译生成。而直接组装 class 文件的这种方式更为直接，根据 JVM 规范所定义的 class 文件的格式，省去了组装源码的步骤，使用输出流直接按格式生成 class 文件，相当于自己实现了 JVM 的功能。这样生成 class 后通过 classloader 加载类，反射调用构造方法进行实例化，就可以得到代理类对象了。上面的代码（还有一部分没贴）就是组装 class 文件的过程，奈何我对其也不是很懂
 
 ---
 <p align='center'><font color='blue'>先相信自己，然后别人才会相信你。</font></p><p align='right'>——罗曼·罗兰</p>
