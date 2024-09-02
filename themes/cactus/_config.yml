@@ -142,7 +142,7 @@ highlight: school-book
 colorscheme: white
 
 # Maximal width of the page in rem units.
-page_width: 52
+page_width: 55
 
 
 ##############################################################################
