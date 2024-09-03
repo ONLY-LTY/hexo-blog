@@ -30,4 +30,4 @@ $$ s(i,j)=\sum_{u \in U_i \bigcap U_j}\sum_{v \in U_i \bigcap U_j}\frac{1}{\alph
 swing：如果同时喜欢两个物品的用户越多，且这些用户之间的重合度越低，那么这两个物品间的相似度越高。
 
 ## 附录
-*[[1]](/pdf/swing.pdf)* Large Scale Product Graph Construction for Recommendation in E-commerce
+*[[1]](/pdf/swing.pdf)* <em style="font-size:14px" >Large Scale Product Graph Construction for Recommendation in E-commerce</em>
