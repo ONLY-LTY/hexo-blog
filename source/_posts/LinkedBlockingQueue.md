@@ -10,6 +10,7 @@ LinkedBlockingQueue 源码分析
 LinkedBlockingQueue 是线程安全的阻塞队列。
 
 ## 成员变量
+
 ```java
     /**
      * Linked list node class
@@ -52,6 +53,7 @@ LinkedBlockingQueue 是线程安全的阻塞队列。
     private transient Node<E> last;
 ```
 以下成员变量是锁的实现
+
 ```java
     /** Lock held by take, poll, etc */
     //删除元素时候，要加的takeLock锁
@@ -75,6 +77,7 @@ LinkedBlockingQueue 是线程安全的阻塞队列。
 **Condition** 是竞态条件对象，和ReentrantLock绑定使用。提供了线程间的通信方式（类似信号量），使用基本上和Object的wait，notify相同。（如需要对Condition深入了解，请看后续文章）。
 
 ##初始化
+
 ```java
     /**
      * Creates a {@code LinkedBlockingQueue} with the given (fixed) capacity.
@@ -204,6 +207,7 @@ LinkedBlocking入队的方法有两种
 
 ```
 入队的链表操作
+
 ```java
     /**
      * Links node at end of queue.

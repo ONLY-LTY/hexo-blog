@@ -3,10 +3,9 @@ title: IdeaVim
 date: 2018-09-26 17:15:28
 tags:
 ---
-IdeaVim 插件配置文件 
+## IdaeVim 配置文件 .ideavimrc
 
-##### IdaeVim 配置文件 .ideavimrc
-```Java
+```sh
 let mapleader=' '
 set hlsearch
 set incsearch
@@ -120,9 +119,9 @@ nnoremap <Leader>tl Vy<CR>:action ActivateTerminalToolWindow<CR>
 vnoremap <Leader>tl y<CR>:action ActivateTerminalToolWindow<CR>
 ```
 
-##### VIM 配置文件
+## VIM 配置文件
 
-```Java
+```sh
 " Configuration file for vim
 set modelines=0		" CVE-2007-2438
 
@@ -216,7 +215,7 @@ call pathogen#infect()
 autocmd vimenter * NERDTree  
 
 "设定 NERDTree 视窗大小
-let g:NERDTreeWinSize = 35 
+let g:NERDTreeWinSize = 35
 
 "开启/关闭nerdtree快捷键
 map <C-f> :NERDTreeToggle<CR>

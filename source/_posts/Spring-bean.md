@@ -13,7 +13,7 @@ Spring bean 配置文件初始化
 
 &emsp;&emsp;1.  新建一个maven项目，导入最基本的spring包依赖。
 
-```maven
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

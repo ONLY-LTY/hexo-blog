@@ -9,6 +9,7 @@ HashSet 源码解析
 ## 1 初始化
 
 HashSet是一个实现非常简单的类，为什么这么说呢？因为它的实现基本都依赖于HashMap，可以先来看一下初始化的内容
+
 ```java
 public class HashSet<E>
   extends AbstractSet<E>
@@ -35,6 +36,7 @@ public class HashSet<E>
 ## 2 操作
 
 按照上面说的思路来说，其实添加和删除，无非是对HashMap的key进行一个操作而已
+
 ```java
 public boolean add(E e) {
     return map.put(e, PRESENT)==null;

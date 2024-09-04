@@ -8,7 +8,8 @@ tags:
 Spring MVC 全局异常处理
 
 &emsp;&emsp;当我们用Sping MVC的时候,可以对Controller层的接口进行全局异常处理。那样就不用每个接口try catch了。只需要继承这个类就好了。
-```Java
+
+```java
 public class BaseExceptionHandler {
 
     private  static final Log LOGGER = LogFactory.getLog(BaseExceptionHandler.class);
