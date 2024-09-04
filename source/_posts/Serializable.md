@@ -4,12 +4,9 @@ date: 2016-11-14 11:31:49
 tags:
   - 序列化
 ---
-Java 序列化
-
-&emsp;&emsp;最近在Rpc的一些内容，主要的序列化和传输两个模块挺重要的，然后详细的去了解了一些序列化的知识，也当复习下。
-
-#### Java序列化
+## Java序列化
 &emsp;&emsp;Java的序列化很简单，只需要实现Serializable接口，然后就可以用ObjectInpuStream、ObjectOutputSteam进行序列化和反序列化了。下面简单演示一下。
+
 ```Java
 public static void main(String[] args) {
         User user = new User();
@@ -62,6 +59,7 @@ public static void main(String[] args) {
     //Read User User{userName='LTY', password='password'}
 ```
 &emsp;&emsp;上面就是简单的，序列化和反序列化的过程。默认情况下Java是序列化所有成员变量的，除了静态变量。很好理解，静态变量并不属于某一个具体的对象。在有就是Transient关键字可以控制成员变量的序列化。
+
 ```Java
        private String userName;
        private transient String password;
@@ -72,6 +70,7 @@ public static void main(String[] args) {
 ```
 &emsp;&emsp;刚才的代码，我在password变量前面加上transient关键字，可以看到反序列化出来的结果为空。
 &emsp;&emsp;Java序列化是将对象转换成的二进制写入文件，并且是可逆的。如果我们在进行Rpc调用的时候，会将这样的二进制格式的数据进行传输。这样是不安全的。对此我们可以自定义序列化和反序列化的一些策略。对一些敏感数据（比如password）进行模糊化。示例如下:
+
 ```Java
         private void writeObject(ObjectOutputStream stream) throws IOException {
             password = password +"decode";  //模拟加密,模糊数据

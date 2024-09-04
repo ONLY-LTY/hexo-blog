@@ -4,10 +4,8 @@ date: 2024-09-04 11:10:38
 tags:
 ---
 ## 1.数据流转——Flink的数据抽象及数据交换过程
-本章打算讲一下flink底层是如何定义和在操作符之间传递数据的。
 
-### 1.1 flink的数据抽象
-#### 1.1.1 MemorySegment
+### 1.1 MemorySegment
 Flink作为一个高效的流框架，为了避免JVM的固有缺陷（java对象存储密度低，FGC影响吞吐和响应等），必然走上自主管理内存的道路。
 
 这个MemorySegment就是Flink的内存抽象。默认情况下，一个MemorySegment可以被看做是一个32kb大的内存块的抽象。这块内存既可以是JVM里的一个byte[]，也可以是堆外内存（DirectByteBuffer）。
@@ -49,7 +47,7 @@ Flink为MemorySegment提供了两个实现类：HeapMemorySegment和HybridMemory
 ```
 其中，第一个构造函数的checkBufferAndGetAddress()方法能够得到direct buffer的内存地址，因此可以操作堆外内存。
 
-#### 1.1.2 ByteBuffer与NetworkBufferPool
+### 1.2 ByteBuffer与NetworkBufferPool
 在MemorySegment这个抽象之上，Flink在数据从operator内的数据对象在向TaskManager上转移，预备被发给下个节点的过程中，使用的抽象或者说内存对象是Buffer。
 
 **注意**：这个Buffer是个flink接口，不是java.nio提供的那个Buffer抽象类。Flink在这一层面同时使用了这两个同名概念，用来存储对象，直接看代码时到处都是各种xxxBuffer很容易混淆：
@@ -221,7 +219,7 @@ LocalBufferPool的逻辑想想无非是增删改查，值得说的是其fields�
 	}
 ```
 
-#### 1.1.3 RecordWriter与Record
+### 1.3 RecordWriter与Record
 我们接着往高层抽象走，刚刚提到了最底层内存抽象是MemorySegment，用于数据传输的是Buffer，那么，承上启下对接从Java对象转为Buffer的中间对象是什么呢？是StreamRecord。
 
 从StreamRecord<T>这个类名字就可以看出来，这个类就是个wrap，里面保存了原始的Java对象。另外，StreamRecord还保存了一个timestamp。
@@ -270,10 +268,10 @@ SerializationResult result = serializer.addRecord(record);
 ```
 在这行代码中，Flink把对象调用该对象所属的序列化器序列化为字节数组。
 
-### 1.2 数据流转过程
+### 1.4 数据流转过程
 上一节讲了各层数据的抽象，这一节讲讲数据在各个task之间exchange的过程。
 
-#### 1.2.1 整体过程
+#### 1.4.1 整体过程
 看这张图：
 ![image_1cetavukjja42ce1261v5k57i9.png-821.8kB][28]
 
@@ -283,7 +281,7 @@ SerializationResult result = serializer.addRecord(record);
  4. 下游节点向上游请求数据
  5. 开始传输数据
 
-#### 1.2.2 数据跨task传递
+#### 1.4.2 数据跨task传递
 本节讲一下算子之间具体的数据传输过程。也先上一张图：
 ![image_1cfmpba9v15anggtvsba2o1277m.png-357.5kB][29]
 数据在task之间传递有如下几步：
@@ -532,13 +530,13 @@ netty相关的部分：
 至此，数据在跨jvm的节点之间的流转过程就讲完了。
 
 ## 2 Credit漫谈
-在看上一部分的代码时，有一个小细节不知道读者有没有注意到，我们的数据发送端的代码叫做PartittionRequesetQueue，而我们的接收端却起了一个完全不相干的名字：CreditBasedPartitionRequestClientHandler。为什么前面加了CreditBased的前缀呢？
 
 ### 2.1 背压问题
 在流模型中，我们期待数据是像水流一样平滑的流过我们的引擎，但现实生活不会这么美好。数据的上游可能因为各种原因数据量暴增，远远超出了下游的瞬时处理能力（回忆一下98年大洪水），导致系统崩溃。
 那么框架应该怎么应对呢？和人类处理自然灾害的方式类似，我们修建了三峡大坝，当洪水来临时把大量的水囤积在大坝里；对于Flink来说，就是在数据的接收端和发送端放置了缓存池，用以缓冲数据，并且设置闸门阻止数据向下流。
 
 那么Flink又是如何处理背压的呢？答案也是靠这些缓冲池。
+
 ![image_1cfksrl5cd4m1lbqqqgvc811349.png-43.1kB][30]
 这张图说明了Flink在生产和消费数据时的大致情况。ResultPartition和InputGate在输出和输入数据时，都要向NetworkBufferPool申请一块MemorySegment作为缓存池。
 接下来的情况和生产者消费者很类似。当数据发送太多，下游处理不过来了，那么首先InputChannel会被填满，然后是InputChannel能申请到的内存达到最大，于是下游停止读取数据，上游负责发送数据的nettyServer会得到响应，停止从ResultSubPartition读取缓存，那么ResultPartition很快也将存满数据不能被消费，从而生产数据的逻辑被阻塞在获取新buffer上，非常自然地形成背压的效果。
@@ -591,6 +589,7 @@ Flink对于EventTime模型的实现，依赖的是一种叫做watermark的对象
 而在现实生活中，经常会遇到乱序的数据。这时，我们虽然在timestamp为7的元素后就收到了11，但是我们一直等到了收到元素12之后，才插入了watermark为11的元素。与上面的图相比，如果我们仍然在11后就插入11的watermark，那么元素9就会被丢弃，造成数据丢失。而我们在12之后插入watermark11，就保证了9仍然会被下一个operator处理。当然，我们不可能无限制的永远等待迟到元素，所以要在哪个元素后插入11需要根据实际场景权衡。
 
 对于来自多个数据源的watermark，可以看这张图：
+
 ![image_1cdbufp4a1opmsit5n61mial4520.png-72kB][41]
 可以看到，当一个operator收到多个watermark时，它遵循最小原则（或者说最早），即算子的当前watermark是流经该算子的最小watermark，以容许来自不同的source的乱序数据到来。
 关于事件时间模型，更多内容可以参考[Stream 101](https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-101) 和谷歌的这篇论文：[Dataflow Model paper](https://research.google.com/pubs/archive/43864.pdf)
@@ -615,6 +614,7 @@ Flink对于EventTime模型的实现，依赖的是一种叫做watermark的对象
 
 **ResourceManager**
 其职责包括获取新的TM和slot，通知失败，释放资源以及缓存TM以用于重用等。重要的是，这个组件要能做到挂掉时不要搞垮正在运行的好好的任务。其职责和与JobManager、TaskManager的交互图如下：
+
 ![image_1cfl9453k1gld4acr1m13j3195sg.png-23.9kB][42]
 
 **TaskManager**
@@ -632,33 +632,41 @@ TM要与上面的两个组件交互。与JobManager交互时，要能提供slot�
 **YARN**
 新的基于YARN的架构主要包括不再需要先在容器里启动集群，然后提交任务；用户代码不再使用动态ClassLoader加载；不用的资源可以释放；可以按需分配不同大小的容器等。其执行过程如下：
 无Dispatcher时
+
 ![image_1cfla0n7u1lg21n3o36uu0c1o5h1a.png-46.2kB][44]
 有Dispatcher时
+
 ![image_1cfla15os15i3qcsu6c4p4clk1n.png-50.7kB][45]
 
 **Mesos**
 与基于YARN的模式很像，但是只有带Dispatcher模式，因为只有这样才能在Mesos集群里跑其RM。
+
 ![image_1cfla4tka101n18bf1mno4npu9s24.png-49.2kB][46]
 Mesos的Fault Tolerance是类似这样的：
+
 ![image_1cfla6eka1ph71mu1pll1q0mgqq2h.png-12.1kB][47]
 必须用类似Marathon之类的技术保证Dispatcher的HA。
 
 **Standalone**
 其实没啥可说的，把以前的JobManager的职责换成现在的Dispatcher就行了。
+
 ![image_1cflaaim2ih2v54umsmq01lqc2u.png-36.8kB][48]
 将来可能会实现一个类似于轻量级Yarn的模式。
 
 **Docker/k8s**
 用户定义好容器，至少有一个是job specific的（不然怎么启动任务）；还有用于启动TM的，可以不是job specific的。启动过程如下
+
 ![image_1cflafs2o1trgicjmdbndn1bdq3b.png-24.2kB][49]
 
 #### 3.2.4 组件设计及细节
 
 **分配slot相关细节**
 从新的TM取slot过程：
+
 ![image_1cflakoadvjm8pf6nt1k331qj33o.png-77.2kB][50]
 
 从Cached TM取slot过程：
+
 ![image_1cflambu91ufi5fl1cg9gimdff45.png-63.4kB][51]
 
 **失败处理**

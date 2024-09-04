@@ -1,5 +1,5 @@
 ---
-title: CMS Failed 
+title: CMS Failed
 date: 2018-11-17 16:40:00
 tags:
     - JVM
@@ -7,8 +7,9 @@ tags:
 ---
 CMS 日志Promotion Failed 和 Concurrent Model Failed 错误分析
 
-##### Promotion Failed 
-```
+##### Promotion Failed
+
+```java
 内存情况
 Heap Configuration:
    MinHeapFreeRatio         = 40
@@ -24,7 +25,7 @@ Heap Configuration:
    MaxMetaspaceSize         = 17592186044415 MB
    G1HeapRegionSize         = 0 (0.0MB)
 ```
-```
+```java
 错误日志
 2018-11-15T09:01:50.794+0800: 51454.418: [GC (Allocation Failure) 2018-11-15T09:01:50.794+0800: 51454.419: [ParNew (promotion failed): 1782424K->1769555K(2236928K), 0.8356030 secs]2018-11-15T09:01:51.630+0800: 51455.254: [CMS: 3509138K->874891K(5592448K), 4.5982825 secs] 5290213K->874891K(7829376K), [Metaspace: 56929K->56929K(1101824K)], 5.4344311 secs] [Times: user=3.61 sys=2.44, real=5.43 secs]
 ```
@@ -32,7 +33,8 @@ Heap Configuration:
 其实问题的核心是Young GG的时候为什么有那么多存活的对象。这个问题就要根据自己当时的具体情况去分析了。
 
 #####  Concurrent Model Failed
-```
+
+```java
 2018-11-21T20:22:38.029+0800: 447086.973: [GC (Allocation Failure) 2018-11-21T20:22:38.029+0800: 447086.973: [ParNew: 559232K->559232K(559232K), 0.0000426 secs]2018-11-21T20:22:38.029+0800: 447086.973: [CMS2018-11-21T20:22:38.482+0800: 447087.426: [CMS-concurrent-sweep: 0.442/0.467 secs] [Times: user=0.48 sys=0.03, real=0.47 secs]
 (concurrent mode failure): 1205455K->965029K(1398144K), 2.3149339 secs] 1764687K->965029K(1957376K), [Metaspace: 54873K->54873K(1099776K)], 2.3157339 secs] [Times: user=2.15 sys=0.17, real=2.31 secs]
 ```

@@ -3,7 +3,6 @@ title: Zookeeper分布式锁
 date: 2018-06-01 18:09:31
 tags:
   - 分布式
-  - Lock
 ---
 基于Zookeeper的分布式锁
 

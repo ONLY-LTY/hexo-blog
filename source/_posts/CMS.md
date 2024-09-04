@@ -14,27 +14,31 @@ JVM CMS垃圾回收器探索
 ## CMS执行过程
 
 ### 1.STW initial mark
-```
+
+```java
 2018-11-21T11:41:46.066+0800: 58424.191: [GC (CMS Initial Mark) [1 CMS-initial-mark: 3636058K(5592448K)] 3691980K(7829376K), 0.0037087 secs] [Times: user=0.06 sys=0.00, real=0.00secs]
 ```
 &emsp;**初始标记：** 这个阶段JVM停止正在执行的任务。从根对象开始扫描和root对象直接关联的对象。这个过程会很快。
 
 ### 2.Concurrent marking
-```
+
+```java
 2018-11-21T11:41:46.070+0800: 58424.195: [CMS-concurrent-mark-start]
 2018-11-21T11:41:46.122+0800: 58424.247: [CMS-concurrent-mark: 0.051/0.051 secs] [Times: user=0.57 sys=0.00, real=0.05 secs]
 ```
 &emsp;**并发标记：** 这个阶段JVM标记线程和用户线程并发执行。在初始标记的基础上继续向下追溯扫描对象，这个过程不会停顿。
 
 ### &emsp;Concurrent precleaning
-```
+
+```java
 2018-11-21T11:41:46.122+0800: 58424.247: [CMS-concurrent-preclean-start]
 2018-11-21T11:41:46.143+0800: 58424.268: [CMS-concurrent-preclean: 0.021/0.021 secs] [Times: user=0.04 sys=0.01, real=0.02 secs]
 ```
 &emsp;**并发预清理：** 这个阶段JVM标记线程和用户线程并发执行。JVM查找在并发标记阶段新进入老年代的对象。通过从新扫描减少下一个阶段的工作，这个过程不会停顿。
 
 ### 3.STW remark
-```
+
+```java
 2018-11-21T11:41:47.486+0800: 58425.611: [GC (CMS Final Remark) [YG occupancy: 1078027 K (2236928 K)]
 2018-11-21T11:41:47.486+0800: 58425.611: [GC (CMS Final Remark)
 2018-11-21T11:41:47.486+0800: 58425.611: [ParNew: 1078027K->40803K(2236928K), 0.0066178 secs] 4714086K->3676908K(7829376K), 0.0069331 secs] [Times: user=0.14 sys=0.00, real=0.00 secs]
@@ -51,14 +55,16 @@ JVM CMS垃圾回收器探索
 &emsp;**重新标记：** 这个阶段JVM停止正在执行的任务。最终确认老年代中存活的对象，因为之前的处理都是并发的，应用程序也在不停的分配对象。
 
 ### 4.Concurrent sweeping
-```
+
+```java
 2018-11-21T11:41:47.616+0800: 58425.741: [CMS-concurrent-sweep-start]
 2018-11-21T11:41:50.523+0800: 58428.648: [CMS-concurrent-sweep: 2.889/2.908 secs] [Times: user=5.07 sys=0.13, real=2.91 secs]
 ```
 &emsp;**并发清理：** 这个阶段JVM清理线程和用户线程并发执行，清理死亡对象。
 
 ### 5.Concurrent reset
-```
+
+```java
 2018-11-21T11:41:50.524+0800: 58428.649: [CMS-concurrent-reset-start]
 2018-11-21T11:41:50.537+0800: 58428.662: [CMS-concurrent-reset: 0.014/0.014 secs] [Times: user=0.03 sys=0.00, real=0.01 secs]
 ```

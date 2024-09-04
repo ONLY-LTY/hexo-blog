@@ -9,8 +9,9 @@ JOOQ 简单的使用
 毕业以后进入的公司数据库持久层用的JOOQ，流式的API敲起来很爽。这里记录一下。具体的用法可以直接查看官网文档 *http://www.jooq.org/*
 
 ### Code Generation
-  JOOQ是根据数据库自动生成的表对象。这里我们使用maven的插件来生成。官方的maven配置* http://www.jooq.org/doc/3.8/manual-single-page/#codegen-configuration*
-  ```maven
+JOOQ是根据数据库自动生成的表对象。这里我们使用maven的插件来生成。官方的maven配置* http://www.jooq.org/doc/3.8/manual-single-page/#codegen-configuration*
+
+  ```xml
 
   <plugin>
     <!-- Specify the maven code generator plugin -->
@@ -62,7 +63,8 @@ JOOQ 简单的使用
 </plugin>
   ```
 然后我们导入JOOQ的包
-```maven
+
+```xml
   <dependency>
      <groupId>org.jooq</groupId>
      <artifactId>jooq</artifactId>
@@ -70,6 +72,7 @@ JOOQ 简单的使用
  </dependency>
 ```
 ### 简单的代码
+
 ```java
 //这使用jOOQ默认的配置
 //或者 DSLContext create = new DefaultDSLContext(SQLDialect.MYSQL);
