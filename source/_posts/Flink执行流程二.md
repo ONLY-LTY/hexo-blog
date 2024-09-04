@@ -249,7 +249,7 @@ private void addEdgeInternal(Integer upStreamVertexID,
 }
 ```
 ### 3.1 WordCount函数的StreamGraph
-flink提供了一个StreamGraph可视化显示工具，[在这里](https://flink.apache.org/visualizer/)
+flink提供了一个StreamGraph可视化显示工具，[在这里](https://wints.github.io/flink-web/visualizer/)
 我们可以把我们的程序的执行计划打印出来 *System.out.println(env.getExecutionPlan());* 复制到这个网站上，点击生成，如图所示：
 
 ![image_1cafgsliu1n2n1uj21p971b0h6m71t.png-25.7kB][8]
@@ -395,10 +395,10 @@ for (JobVertex jobVertex : topologiallySorted) {
 ```
 至此，ExecutorGraph就创建完成了。
 
-[4]: https://static.zybuluo.com/bethunebtj/nseitc0kyuq0n44s7qcp6ij9/image_1caf1oll019fp1odv1bh9idosr79.png
-[5]: https://static.zybuluo.com/bethunebtj/69v9syr2p5k5om3c4jox9wh0/image_1caf64b7c1gjnv2eebi1v9e1cvum.png
-[6]: https://static.zybuluo.com/bethunebtj/a8sjspg8agzl3utnncntds9q/image_1caf6ak4rkqsc1u1hci93fe0d13.png
-[7]: https://static.zybuluo.com/bethunebtj/6zmlsivd9cjdm5nhsacuk3o1/image_1caf71h79s0s3fodem1aeb1j3m1g.png
-[8]: https://static.zybuluo.com/bethunebtj/sfckex3xgu33m3srk2bc5hgk/image_1cafgsliu1n2n1uj21p971b0h6m71t.png
-[9]: https://static.zybuluo.com/bethunebtj/jcjalvv130ex52vkglkt56r2/image_1cafj7s6bittk5tt0bequlig2a.png
-[10]: https://static.zybuluo.com/bethunebtj/dj015uuqpnb4ct7810qfilhe/image_1cafn516r1p68kt31g7r196rcsv2n.png
+[4]: /img/image_1caf1oll019fp1odv1bh9idosr79.png
+[5]: /img/image_1caf64b7c1gjnv2eebi1v9e1cvum.png
+[6]: /img/image_1caf6ak4rkqsc1u1hci93fe0d13.png
+[7]: /img/image_1caf71h79s0s3fodem1aeb1j3m1g.png
+[8]: /img/image_1cafgsliu1n2n1uj21p971b0h6m71t.png
+[9]: /img/image_1cafj7s6bittk5tt0bequlig2a.png
+[10]: /img/image_1cafn516r1p68kt31g7r196rcsv2n.png

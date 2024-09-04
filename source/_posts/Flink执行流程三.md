@@ -598,10 +598,10 @@ public boolean processInput() throws Exception {
 
 接下来，我们挑几个Operator看看flink是如何抽象这些算子的。
 
-[11]: https://static.zybuluo.com/bethunebtj/qiv2wip1rok62ljo0tef3qf0/image_1cafnu1pl1d8c15m219b8vkb2334.png
-[12]: https://static.zybuluo.com/bethunebtj/b7cmjn41b1zp5sco34kgvusn/image_1cclle7ui2j41nf611gs1is18m19.png
-[13]: https://static.zybuluo.com/bethunebtj/6ypu9v09z0mit936uk0mcddi/image_1cafpf21c1jh3s5ap1fisu4v23h.png
-[14]: https://static.zybuluo.com/bethunebtj/tgamd7vw9qcdttvihlmvhie9/image_1cafpko68b3r1lk0dpsnmbj3c3u.png
-[15]: https://static.zybuluo.com/bethunebtj/l0n9ny2y198x0daucmyo0zb4/image_1cafqroarkjkuje1hfi18gor654b.png
-[16]: https://static.zybuluo.com/bethunebtj/d3j6qnbjywjzknu6pb3pou6i/image_1cag7idg4vfj1l871n0l1k0e1f7u4o.png
-[17]: https://static.zybuluo.com/bethunebtj/9bemw0us5cocnej8lq4x64rk/image_1cbkaa8r9182i18ct1kfu8g829m9.png
+[11]: /img/image_1cafnu1pl1d8c15m219b8vkb2334.png
+[12]: /img/image_1cclle7ui2j41nf611gs1is18m19.png
+[13]: /img/image_1cafpf21c1jh3s5ap1fisu4v23h.png
+[14]: /img/image_1cafpko68b3r1lk0dpsnmbj3c3u.png
+[15]: /img/image_1cafqroarkjkuje1hfi18gor654b.png
+[16]: /img/image_1cag7idg4vfj1l871n0l1k0e1f7u4o.png
+[17]: /img/image_1cbkaa8r9182i18ct1kfu8g829m9.png
