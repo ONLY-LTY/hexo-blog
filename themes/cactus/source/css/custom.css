@@ -1,0 +1,15 @@
+/* figure + p {
+  display: none;
+} */
+p {
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+ul {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+ol {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
