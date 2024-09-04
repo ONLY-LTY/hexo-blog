@@ -249,6 +249,6 @@ private void scheduleExecutionGraph() {
 
 至此，第一部分就讲完了。
 
-  [1]: http://static.zybuluo.com/bethunebtj/jal2x1y6zqs4jug4ryqnvu3l/image_1cae39t06eoo3ml1be8o0412c69.png
-  [2]: http://static.zybuluo.com/bethunebtj/6hhl3e1fumlr0aq78d2m35nt/image_1cae7g15p6k94no1ves121c5pd9.png
-  [3]: http://static.zybuluo.com/bethunebtj/y9hjeinc58dqc7wiepv2iim4/image_1cenfj3p9fp110p0a8unn1mrh9.png
+  [1]: https://static.zybuluo.com/bethunebtj/jal2x1y6zqs4jug4ryqnvu3l/image_1cae39t06eoo3ml1be8o0412c69.png
+  [2]: https://static.zybuluo.com/bethunebtj/6hhl3e1fumlr0aq78d2m35nt/image_1cae7g15p6k94no1ves121c5pd9.png
+  [3]: https://static.zybuluo.com/bethunebtj/y9hjeinc58dqc7wiepv2iim4/image_1cenfj3p9fp110p0a8unn1mrh9.png
